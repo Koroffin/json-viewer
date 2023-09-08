@@ -23,7 +23,7 @@ const FileUploadInput = styled.input`
 `;
 
 export function FilePage() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
