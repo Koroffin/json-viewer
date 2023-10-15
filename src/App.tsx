@@ -3,6 +3,7 @@ import { QuestsPage } from "./QuestsPage";
 import { MainPage } from "./Main";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { DialogPage } from "./DialogPage";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
   {
     path: "/quests/list",
     element: <QuestsPage />,
+  },
+  {
+    path: "/dialogs",
+    element: <DialogPage />,
   },
 ]);
 

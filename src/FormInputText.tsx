@@ -1,18 +1,13 @@
-import { Controller } from "react-hook-form";
-import styled from "@emotion/styled";
+import { Controller, FieldValues } from "react-hook-form";
 import TextField from "@mui/material/TextField";
-import { FormInputProps } from "./FormInputProps";
+import { FormInputTextProps } from "./FormInputProps";
 
-const $TextField = styled(TextField)`
-  width: 100%;
-`;
-
-export const FormInputText = ({
+export const FormInputText = <T extends FieldValues>({
   name,
   control,
   label,
   multiline = false,
-}: FormInputProps) => {
+}: FormInputTextProps<T>) => {
   return (
     <Controller
       name={name}
