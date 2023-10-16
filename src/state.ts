@@ -45,6 +45,7 @@ class DialogStore {
       updateNodeText: action,
       updateNodeNext: action,
       addNode: action,
+      addNodeNext: action,
       setEditingNode: action,
     });
   }
@@ -73,6 +74,11 @@ class DialogStore {
     const node = this.getNode(id);
     if (!node) return;
     node.next = next;
+  }
+  addNodeNext(id: number) {
+    const node = this.getNode(id);
+    if (!node) return;
+    node.next = [...node.next, { to: 0, value: "" }];
   }
   getNode(id: number) {
     return this.nodes.find((node) => node.id === id);

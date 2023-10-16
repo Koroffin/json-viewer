@@ -1,4 +1,5 @@
 import { Control } from "react-hook-form";
+import Button from '@mui/material/Button';
 import { FormInputText } from "./FormInputText";
 import { Box } from "./Box";
 import { FormInputSelect } from "./FormInputSelect";
@@ -8,10 +9,12 @@ export const DialogEditLinks = ({
   next,
   control,
   blacklistedIds = [],
+  addNodeNext,
 }: {
   next: DialogNode["next"];
   control: Control<DialogNode, any>;
   blacklistedIds?: DialogNode["id"][];
+  addNodeNext: () => void;
 }) => {
   return (
     <>
@@ -34,6 +37,11 @@ export const DialogEditLinks = ({
           </Box>
         </div>
       ))}
+      <Box>
+        <Button variant="contained" onClick={addNodeNext}>
+          Add Link
+        </Button>
+      </Box>
     </>
   );
 };

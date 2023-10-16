@@ -24,13 +24,16 @@ export const DialogEditForm = observer(() => {
 
   const onSubmit: SubmitHandler<DialogNode> = useCallback(
     (data) => {
-      console.log("data", data);
       dialogStore.updateNodeText(dialog!.id, data.text);
       dialogStore.updateNodeNext(dialog!.id, data.next);
       dialogStore.setEditingNode(null);
     },
     [dialog],
   );
+
+  const addNodeNext = useCallback(() => {
+    dialogStore.addNodeNext(dialog!.id);
+  }, [dialog]);
 
   const { handleSubmit, control, setValue } = useForm<DialogNode>({
     defaultValues: dialog || {},
@@ -56,7 +59,7 @@ export const DialogEditForm = observer(() => {
       <Box>
         <Typography variant="h6">Links</Typography>
       </Box>
-      <DialogEditLinks next={dialog.next} control={control} blacklistedIds={[ dialog.id ]} />
+      <DialogEditLinks next={dialog.next} control={control} blacklistedIds={[ dialog.id ]} addNodeNext={addNodeNext} />
 
       <Box>
         <Button type="submit" variant="contained">

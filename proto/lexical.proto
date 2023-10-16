@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package lexical;
+
+import "google/protobuf/empty.proto";
+
+message LexicalToken {
+    string id = 1;
+    string value = 1;
+}
+
+message Lexical {
+    repeated LexicalToken data = 1;
+}
+
+service Lexicals {
+    rpc GetLexicals(google.protobuf.Empty) returns (Lexical) {}
+    rpc AddLexical(LexicalToken) returns (google.protobuf.Empty) {}
+}
