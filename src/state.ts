@@ -38,6 +38,8 @@ class DialogStore {
   constructor() {
     makeObservable(this, {
       nodes: observable,
+      canvasWidth: computed,
+      canvasHeight: computed,
       options: computed,
       editingNode: observable,
       setData: action,
@@ -54,6 +56,37 @@ class DialogStore {
       value: node.id,
       label: node.text,
     }));
+  }
+  get canvasWidth() {
+    return Math.max(Math.max(...this.nodes.map((node) => node.left + this.calculateNodeWidth(node.id))) + 300, window.innerWidth);
+  }
+  get canvasHeight() {
+    return Math.max(Math.max(...this.nodes.map((node) => node.top + this.calculateNodeHeight(node.id))) + 300, window.innerHeight);
+  }
+  get lexicon() {
+    const lexicon: { id: string; value: string }[] = [];
+    let optionsCounter = 0;
+    this.nodes.forEach((node) => {
+      lexicon.push({ id: `dialogue.${node.id}`, value: node.text });
+      node.next.forEach((next) => {
+        lexicon.push({ id: `option.${++optionsCounter}`, value: next.value });
+      });
+    });
+    return { data: lexicon };
+  }
+  get json() {
+    const data: { id: string; links: { to: string; value: string }[] }[] = [];
+    let optionsCounter = 0;
+
+    this.nodes.forEach((node) => {
+      const links: { to: string; value: string }[] = [];
+      node.next.forEach((next) => {
+        links.push({ value: `option.${++optionsCounter}`, to: `dialogue.${next.to}` });
+      });
+      data.push({ id: `dialogue.${node.id}`, links });
+    });
+
+    return { data };
   }
   setData(nodes: DialogNode[]) {
     this.nodes = nodes;
@@ -83,17 +116,34 @@ class DialogStore {
   getNode(id: number) {
     return this.nodes.find((node) => node.id === id);
   }
-  calculateNodeMiddle(id: number) {
-    // consider that padding is 10px and font size is 16px Times New Roman
+  calculateNodeWidth(id: number) {
     const node = this.getNode(id);
-    if (!node) return;
+    if (!node) return 0;
+    const text = node.text;
+    const lines = text.split("\n");
+    const padding = 10;
+    const width =
+      Math.max(...lines.map((line) => line.length)) * 8 + padding * 2;
+    return width;
+  }
+  calculateNodeHeight(id: number) {
+    const node = this.getNode(id);
+    if (!node) return 0;
     const text = node.text;
     const lines = text.split("\n");
     const lineHeight = 16;
     const padding = 10;
     const height = lines.length * lineHeight + padding * 2;
-    const width =
-      Math.max(...lines.map((line) => line.length)) * 8 + padding * 2;
+    return height;
+  }
+  calculateNodeMiddle(id: number) {
+    // consider that padding is 10px and font size is 16px Times New Roman
+    const node = this.getNode(id);
+    if (!node) return;
+
+    const height = this.calculateNodeHeight(id);
+    const width = this.calculateNodeWidth(id);
+
     const top = node.top + height / 2;
     const left = node.left + width / 2;
 
