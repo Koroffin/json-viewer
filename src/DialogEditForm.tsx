@@ -1,11 +1,11 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import styled from "@emotion/styled";
-import { Button, Typography } from "@mui/material";
-import { dialogStore } from "./state";
-import { FormInputText } from "./FormInputText";
-import { observer } from "mobx-react-lite";
 import { useCallback, useEffect } from "react";
-import { Box } from "./Box";
+import styled from "@emotion/styled";
+import { observer } from "mobx-react-lite";
+import { Button, Stack, Typography } from "@mui/material";
+import { Box, FormInputText } from "@arbuzalchemy/common-ui";
+
+import { dialogStore } from "./state";
 import { DialogEditLinks } from "./DialogEditLinks";
 
 const Form = styled.form`
@@ -34,6 +34,9 @@ export const DialogEditForm = observer(() => {
   const addNodeNext = useCallback(() => {
     dialogStore.addNodeNext(dialog!.id);
   }, [dialog]);
+  const deleteNodeNext = useCallback((index: number) => {
+    dialogStore.deleteNodeNext(dialog!.id, index);
+  }, [dialog]);
 
   const { handleSubmit, control, setValue } = useForm<DialogNode>({
     defaultValues: dialog || {},
@@ -59,12 +62,20 @@ export const DialogEditForm = observer(() => {
       <Box>
         <Typography variant="h6">Links</Typography>
       </Box>
-      <DialogEditLinks next={dialog.next} control={control} blacklistedIds={[ dialog.id ]} addNodeNext={addNodeNext} />
+      <DialogEditLinks deleteNodeNext={deleteNodeNext} next={dialog.next} control={control} addNodeNext={addNodeNext} />
 
       <Box>
-        <Button type="submit" variant="contained">
-          Save
-        </Button>
+        <Stack direction="row" spacing={2}>
+          <Button type="submit" variant="contained">
+            Save
+          </Button>
+          <Button variant="contained" color="error" onClick={() => {
+            dialogStore.deleteNode(dialog.id);
+            dialogStore.setEditingNode(null);
+          }}>
+            Delete
+          </Button>
+        </Stack>
       </Box>
     </Form>
   );

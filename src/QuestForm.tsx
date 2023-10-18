@@ -1,15 +1,9 @@
-import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import styled from "@emotion/styled";
-import { Button } from "@mui/material";
-import Box from "@mui/material/Box";
-import { questsStore } from "./state";
-import { FormInputText } from "./FormInputText";
+import { Box, Button } from "@mui/material";
+import { FormInputText } from "@arbuzalchemy/common-ui";
 
-const $Box = styled(Box)`
-  width: 80%;
-  margin: 40px auto;
-`;
+import { questsStore } from "./state";
+
 
 export const QuestForm = ({ quest }: { quest: Quest }) => {
   const { handleSubmit, control } = useForm<Quest>({
@@ -21,49 +15,49 @@ export const QuestForm = ({ quest }: { quest: Quest }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <$Box>
+      <Box>
         <FormInputText label="Name" name="name" control={control} />
-      </$Box>
+      </Box>
 
-      <$Box>
+      <Box>
         <FormInputText
           label="Description"
           name="description"
           control={control}
           multiline
         />
-      </$Box>
+      </Box>
 
-      <$Box>
+      <Box>
         <FormInputText label="Objective" name="objective" control={control} />
-      </$Box>
+      </Box>
 
-      <$Box>
+      <Box>
         <FormInputText label="Hints" name="hints" control={control} />
-      </$Box>
+      </Box>
 
       {quest.steps.map((step, index) => (
-        <$Box key={index}>
+        <Box key={index}>
           <FormInputText
             label={`Step ${index + 1}`}
             name={`steps[${index}].text` as any}
             control={control}
           />
-        </$Box>
+        </Box>
       ))}
-      <$Box>
+      <Box>
         <FormInputText
           label="Closing Text"
           name="closing_text"
           control={control}
         />
-      </$Box>
+      </Box>
 
-      <$Box>
+      <Box>
         <Button type="submit" variant="contained">
           Save
         </Button>
-      </$Box>
+      </Box>
     </form>
   );
 };

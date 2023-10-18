@@ -1,31 +1,31 @@
 import { Control } from "react-hook-form";
 import Button from '@mui/material/Button';
-import { FormInputText } from "./FormInputText";
-import { Box } from "./Box";
-import { FormInputSelect } from "./FormInputSelect";
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Box, DeleteButton, FormInputSelect, FormInputText } from "@arbuzalchemy/common-ui";
+
 import { dialogStore } from "./state";
 
 export const DialogEditLinks = ({
   next,
   control,
-  blacklistedIds = [],
   addNodeNext,
+  deleteNodeNext,
 }: {
   next: DialogNode["next"];
   control: Control<DialogNode, any>;
-  blacklistedIds?: DialogNode["id"][];
   addNodeNext: () => void;
+  deleteNodeNext: (index: number) => void;
 }) => {
   return (
     <>
       {next.map(({ to, value }, index) => (
-        <div key={index}>
+        <div key={index} style={{ position: "relative" }}>
           <Box>
             <FormInputSelect
               label="To"
               name={`next.${index}.to`}
               control={control}
-              options={dialogStore.options.filter(option => !blacklistedIds.includes(option.value))}
+              options={dialogStore.options}
             />
           </Box>
           <Box>
@@ -35,6 +35,13 @@ export const DialogEditLinks = ({
               control={control}
             />
           </Box>
+          <DeleteButton onClick={() => {
+            deleteNodeNext(index);
+            control.unregister(`next.${index}.to`);
+            control.unregister(`next.${index}.value`);
+          }}>
+            <DeleteIcon />
+          </DeleteButton>
         </div>
       ))}
       <Box>

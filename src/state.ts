@@ -48,6 +48,8 @@ class DialogStore {
       updateNodeNext: action,
       addNode: action,
       addNodeNext: action,
+      deleteNodeNext: action,
+      deleteNode: action,
       setEditingNode: action,
     });
   }
@@ -113,6 +115,11 @@ class DialogStore {
     if (!node) return;
     node.next = [...node.next, { to: 0, value: "" }];
   }
+  deleteNodeNext(id: number, index: number) {
+    const node = this.getNode(id);
+    if (!node) return;
+    node.next = node.next.filter((_, i) => i !== index);
+  }
   getNode(id: number) {
     return this.nodes.find((node) => node.id === id);
   }
@@ -150,7 +157,7 @@ class DialogStore {
     return { top, left };
   }
   addNode(text: string) {
-    const id = this.nodes.length + 1;
+    const id = new Date().getTime();
     // find some spot, do not occupoed by other nodes
     let top = 100;
     let left = 100;
@@ -170,7 +177,11 @@ class DialogStore {
   }
   deleteNode(id: number) {
     const index = this.nodes.findIndex((node) => node.id === id);
-    this.nodes.splice(index, 1);
+    this.nodes = this.nodes.filter((_, i) => i !== index);
+    // clean up links to non-existing nodes
+    this.nodes.forEach((node) => {
+      node.next = node.next.filter((next) => this.getNode(next.to));
+    });
   }
   setEditingNode(node: DialogNode | null) {
     this.editingNode = node;

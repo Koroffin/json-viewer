@@ -1,8 +1,8 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Button } from "@mui/material";
+import { Box, FormInputText } from "@arbuzalchemy/common-ui";
+
 import { dialogStore } from "./state";
-import { FormInputText } from "./FormInputText";
-import { Box } from "./Box";
 
 export const DialogForm = () => {
   const { handleSubmit, control } = useForm<DialogNode>({
