@@ -5,21 +5,23 @@ import { MainPage } from "./Main";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { DialogPage } from "./DialogPage";
 
+export const rootUrl = "/json-viewer"
+
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: `${rootUrl}/`,
     element: <MainPage />,
   },
   {
-    path: "/quests",
+    path: `${rootUrl}/quests`,
     element: <FilePage />,
   },
   {
-    path: "/quests/list",
+    path: `${rootUrl}/quests/list`,
     element: <QuestsPage />,
   },
   {
-    path: "/dialogs",
+    path: `${rootUrl}/dialogs`,
     element: <DialogPage />,
   },
 ]);

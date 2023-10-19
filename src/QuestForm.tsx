@@ -4,7 +4,6 @@ import { FormInputText } from "@arbuzalchemy/common-ui";
 
 import { questsStore } from "./state";
 
-
 export const QuestForm = ({ quest }: { quest: Quest }) => {
   const { handleSubmit, control } = useForm<Quest>({
     defaultValues: quest,

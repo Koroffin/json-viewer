@@ -1,8 +1,6 @@
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { DialogContainer } from "./DialogContainer";
-import { DialogForm } from "./DialogForm";
-import { DialogSaveButton } from "./DialogSaveButton";
+import { DialogContainer, DialogForm, DialogSaveButton } from "@arbuzalchemy/dialog-tree";
 
 export const DialogPage = () => {
   return (

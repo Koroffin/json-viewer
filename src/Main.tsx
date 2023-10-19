@@ -5,14 +5,15 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
+import { rootUrl } from "./App";
 
 export const MainPage = () => {
   const navigate = useNavigate();
   const goToQuests = () => {
-    navigate("/quests");
+    navigate(`${rootUrl}/quests`);
   };
   const goToDialogs = () => {
-    navigate("/dialogs");
+    navigate(`${rootUrl}/dialogs`);
   };
 
   return (
