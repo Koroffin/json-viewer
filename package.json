@@ -5,7 +5,7 @@
   "private": true,
   "dependencies": {
     "@arbuzalchemy/common-ui": "1.0.10",
-    "@arbuzalchemy/dialog-tree": "^1.0.6",
+    "@arbuzalchemy/dialog-tree": "^1.0.9",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@fontsource/roboto": "^5.0.8",
