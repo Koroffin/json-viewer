@@ -50,10 +50,10 @@
     react-dom "^18.2.0"
     react-hook-form "^7.47.0"
 
-"@arbuzalchemy/dialog-tree@^1.0.9":
-  version "1.0.9"
-  resolved "https://npm.pkg.github.com/download/@arbuzalchemy/dialog-tree/1.0.9/0a3a5e073c1daf3bf8dc7eca3688aae34ec30bf0#0a3a5e073c1daf3bf8dc7eca3688aae34ec30bf0"
-  integrity sha512-Z0OXBtjvzAggXWRBN93PQzuYlivgvR5mrC9Ywak/gZa31XHAAiondhcpfaEGvPvBhPTny7dJ8LbtihTAeln2+g==
+"@arbuzalchemy/dialog-tree@^1.0.11":
+  version "1.0.11"
+  resolved "https://npm.pkg.github.com/download/@arbuzalchemy/dialog-tree/1.0.11/4647b5d7c391a1e85e6eb29cb872a205dbfa0f1c#4647b5d7c391a1e85e6eb29cb872a205dbfa0f1c"
+  integrity sha512-Pt+FBNUBLukD09JN3ap7YMUFPO5loBnIdtlz2oEtICjGdFQJ2LF/vEjssfc6peL8G5pdPtSf/u0bMoDv5W+0yQ==
   dependencies:
     "@arbuzalchemy/common-ui" "^1.0.10"
     "@emotion/styled" "^11.11.0"

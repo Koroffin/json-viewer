@@ -10,6 +10,7 @@ const BottomBar = styled.div`
   right: 0;
   bottom: 0;
   background-color: white;
+  z-index: 100;
 `;
 
 export const DialogPage = () => {
