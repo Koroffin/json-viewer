@@ -13,6 +13,10 @@ const BottomBar = styled.div`
   z-index: 100;
 `;
 
+const StyledDialogSaveButton = styled(DialogSaveButton)`
+  z-index: 200;
+`;
+
 export const DialogPage = () => {
   return (
     <DndProvider backend={HTML5Backend}>
@@ -20,7 +24,7 @@ export const DialogPage = () => {
       <BottomBar>
         <DialogForm />
       </BottomBar>
-      <DialogSaveButton />
+      <StyledDialogSaveButton />
     </DndProvider>
   );
 };
